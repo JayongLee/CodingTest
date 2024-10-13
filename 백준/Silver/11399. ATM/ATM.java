@@ -19,20 +19,27 @@ public class Main {
 
         Arrays.sort(time);
 
+//        int sum = 0;
+//
+//        for (int i = 0; i < N; i++) {
+//            sum += money_time(i, time);
+//        }
         int sum = 0;
+        int cumulativeSum = 0;
 
         for (int i = 0; i < N; i++) {
-            sum += money_time(i, time);
+            cumulativeSum += time[i];
+            sum += cumulativeSum;
         }
 
         System.out.println(sum);
     }
 
-    public static int money_time(int i, int[] arr) {
-        if (i == 0) {
-            return arr[0];
-        }
-
-        return money_time(i-1, arr) + arr[i];
-    }
+//    public static int money_time(int i, int[] arr) {
+//        if (i == 0) {
+//            return arr[0];
+//        }
+//
+//        return money_time(i-1, arr) + arr[i];
+//    }
 }
