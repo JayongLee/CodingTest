@@ -1,29 +1,38 @@
-public class Solution {
+import java.util.HashSet;
+import java.util.Set;
+
+class Solution {
+    // 기울기를 계산하는 메서드
+    public double getSlope(int x1, int y1, int x2, int y2) {
+        if (x2 == x1) {
+            return Double.POSITIVE_INFINITY; // 수직선인 경우
+        }
+        return (double) (y2 - y1) / (x2 - x1);
+    }
+
     public int solution(int[][] dots) {
-        // 모든 가능한 두 직선 조합의 기울기를 비교
-        if (isParallel(dots[0], dots[1], dots[2], dots[3]) ||
-            isParallel(dots[0], dots[2], dots[1], dots[3]) ||
-            isParallel(dots[0], dots[3], dots[1], dots[2])) {
+        // 기울기를 저장할 Set
+        Set<Double> slopes = new HashSet<>();
+
+        // 각 쌍의 기울기를 계산하고 비교
+        double slope12 = getSlope(dots[0][0], dots[0][1], dots[1][0], dots[1][1]);
+        double slope34 = getSlope(dots[2][0], dots[2][1], dots[3][0], dots[3][1]);
+        if (slope12 == slope34) {
             return 1;
         }
-        return 0;
-    }
 
-    // 두 직선이 평행한지 확인하는 함수
-    private boolean isParallel(int[] dot1, int[] dot2, int[] dot3, int[] dot4) {
-        // 첫 번째 직선의 기울기
-        double slope1 = getSlope(dot1, dot2);
-        // 두 번째 직선의 기울기
-        double slope2 = getSlope(dot3, dot4);
-        // 두 직선의 기울기가 같으면 평행
-        return slope1 == slope2;
-    }
-
-    // 두 점 사이의 기울기를 구하는 함수
-    private double getSlope(int[] dot1, int[] dot2) {
-        if (dot1[0] == dot2[0]) { // x좌표가 같으면 수직선
-            return Double.MAX_VALUE; // 무한대 값으로 처리
+        double slope13 = getSlope(dots[0][0], dots[0][1], dots[2][0], dots[2][1]);
+        double slope24 = getSlope(dots[1][0], dots[1][1], dots[3][0], dots[3][1]);
+        if (slope13 == slope24) {
+            return 1;
         }
-        return (double) (dot2[1] - dot1[1]) / (dot2[0] - dot1[0]);
+
+        double slope14 = getSlope(dots[0][0], dots[0][1], dots[3][0], dots[3][1]);
+        double slope23 = getSlope(dots[1][0], dots[1][1], dots[2][0], dots[2][1]);
+        if (slope14 == slope23) {
+            return 1;
+        }
+
+        return 0;
     }
 }
