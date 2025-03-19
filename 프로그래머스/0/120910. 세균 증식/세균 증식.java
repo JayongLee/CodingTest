@@ -1,6 +1,6 @@
 class Solution {
-    public double solution(int n, int t) {
-        double answer = n * Math.pow(2, t);
+    public int solution(int n, int t) {
+        int answer = n * (int) Math.pow(2, t);
         return answer;
     }
 }
