@@ -55,11 +55,15 @@ public class Main {
 
     private static int checkBing(boolean[][] check) {
         int bingo = 0;
-        boolean[] trueArr = {true, true, true, true, true};
         for (int i = 0; i < 5; i++) {
-            if (Arrays.equals(check[i], trueArr)) {
-                bingo++;
+            boolean flag = true;
+            for (int j = 0; j < 5; j++) {
+                if (!check[i][j]) {
+                    flag = false;
+                    break;
+                }
             }
+            if (flag) bingo++;
         }
         for (int col = 0; col < 5; col++) {
             boolean flag = true;
